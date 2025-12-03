@@ -33,7 +33,7 @@ def normalize_text(text:str)->str:
     if not isinstance(text,str):
         return ""
     text = text.replace('\n',' ')
-    text = re.sun(r'\s+',' ',text)
+    text = re.sub(r'\s+',' ',text)
     return text.strip()
 
 # 4. BM25 Tokenizer (regex based, keeps technical tokens)
