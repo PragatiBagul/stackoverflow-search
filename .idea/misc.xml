@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (stackoverflow-search)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (stackoverflow-search)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 virtualenv at ~/Study/Projects/stackoverflow-search/.venv" project-jdk-type="Python SDK" />
 </project>
