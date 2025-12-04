@@ -25,12 +25,32 @@ def make_snippet_from_body(body:str,max_chars:int=250)->str:
         return cut[:last_period+1]
     return cut + "..."
 
-# Load metadata table (Id, Title, Body)
-def load_questions_meta(path:str) -> pd.DataFrame:
+def load_questions_meta(path: str):
+    """
+    Load questions metadata parquet and return a DataFrame indexed by the question id column.
+
+    Accepts common id column name variants: "Id", "id", "ID".
+    Raises a clear FileNotFoundError or ValueError if the file or expected column is missing.
+    """
+    import os
+    import pandas as pd
+
     if not os.path.exists(path):
-        raise FileNotFoundError(path)
+        raise FileNotFoundError(f"questions_meta path not found: {path}")
+
     meta = pd.read_parquet(path)
-    return meta.set_index("id")
+
+    # Accept common variants for the id column
+    for col in ("Id", "id", "ID"):
+        if col in meta.columns:
+            return meta.set_index(col)
+
+    # If no accepted column found, raise helpful error listing available columns
+    raise ValueError(
+        f"questions_meta does not contain an id column. Found columns: {list(meta.columns)}. "
+        "Expected one of: 'Id', 'id', 'ID'."
+    )
+
 
 # Simple feature computation for candidates
 def compute_features_for_candidates(

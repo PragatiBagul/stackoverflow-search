@@ -20,7 +20,7 @@ if PROJECT_ROOT not in sys.path:
 # Streamlit must be started from the project root so Python can import src.
 LOCAL_SEARCH_AVAILABLE = True
 try:
-    from src.stacksearch.bm25.build_bm25 import load_bm25_index, bm25_search
+    from src.stacksearch.bm25.build_bm25 import load_bm25_artifacts, bm25_search
     from src.stacksearch.api.utils import make_snippet_from_body, load_questions_meta
 except Exception:
     LOCAL_SEARCH_AVAILABLE = False
@@ -59,8 +59,8 @@ def local_bm25_search(query: str, k: int, bm25_dir: str = DEFAULT_BM25_DIR, meta
     BM25-only fallback: loads bm25 artifacts + questions_meta,
     returns results list similar to API response.
     """
-    bm25, doc_ids, _ = load_bm25_index(bm25_dir)
-    top_ids, scores = bm25_search(bm25, doc_ids, query, k=k, bm25_tokenize_fn=None)
+    bm25, doc_ids, _ = load_bm25_artifacts(bm25_dir)
+    top_ids, scores = bm25_search(bm25, doc_ids, query, k=k)
     meta = load_questions_meta(meta_path)
     items = []
     for did, sc in zip(top_ids.tolist(), scores.tolist()):
