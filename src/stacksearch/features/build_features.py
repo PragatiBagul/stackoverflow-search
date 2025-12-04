@@ -10,7 +10,7 @@ import os
 def load_bm25_artifacts(bm25_dir: str):
     with open(os.path.join(bm25_dir, "bm25_index.pkl"), "rb") as f:
         bm25 = pickle.load(f)
-    doc_ids = np.load(os.path.join(bm25_dir, "doc_ids.npy"), allow_pickle=False)
+    doc_ids = np.load(os.path.join(bm25_dir, "bm25_doc_ids.npy"), allow_pickle=False)
     return bm25, doc_ids
 
 def load_embeddings(emb_path: str, ids_path: str) -> Tuple[np.ndarray, np.ndarray]:

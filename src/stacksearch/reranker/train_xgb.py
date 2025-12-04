@@ -81,7 +81,7 @@ def prepare_dmatrix_from_features(df:pd.DataFrame,feature_cols:List[str]) -> Tup
     y = df_sorted['label'].astype(np.float32).values
 
     dmat = xgb.DMatrix(X, label=y)
-    dmat.set_groups(groups)
+    dmat.set_group(groups)
     return dmat, groups
 
 # Train function

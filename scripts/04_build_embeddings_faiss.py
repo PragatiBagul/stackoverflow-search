@@ -37,6 +37,7 @@ def main():
     save_faiss_index(index,idx_path)
 
     # Save doc_ids mapping
+    print(f'Doc ids  : {doc_ids}')
     ids_path = os.path.join(args.output_dir,"doc_ids.npy")
     np.save(ids_path, doc_ids)
     print(f"Saved doc_ids -> {ids_path}")
