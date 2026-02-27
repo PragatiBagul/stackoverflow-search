@@ -61,3 +61,43 @@ def ndcg_at_k(retrieved_ids: List[str], relevant_ids: Set[str])->float:
     if ideal_dcg == 0:
         return 0.0
     return actual_dcg / ideal_dcg
+
+
+def precision_at_k(
+    retrieved_ids: Iterable[str],
+    relevant_ids: Set[str],
+    k: int | None = None,
+) -> float:
+    """
+    Compute Precision@k.
+
+    Parameters
+    ----------
+    retrieved_ids : Iterable[str]
+        Ranked list of retrieved document IDs (best first).
+    relevant_ids : Set[str]
+        Set of relevant document IDs.
+    k : int, optional
+        Cutoff rank. If None, uses full retrieved list.
+
+    Returns
+    -------
+    float
+        Precision@k score in [0, 1].
+    """
+    if not relevant_ids:
+        return 0.0
+
+    retrieved_ids = list(retrieved_ids)
+
+    if k is not None:
+        retrieved_ids = retrieved_ids[:k]
+
+    if not retrieved_ids:
+        return 0.0
+
+    num_relevant = sum(
+        1 for doc_id in retrieved_ids if doc_id in relevant_ids
+    )
+
+    return num_relevant / len(retrieved_ids)
