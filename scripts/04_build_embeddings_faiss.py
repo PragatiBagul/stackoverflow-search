@@ -1,11 +1,13 @@
 import argparse
-import os
 import numpy as np
 import pandas as pd
 from src.stacksearch.dense.embed import embed_texts
 from src.stacksearch.dense.faiss_index import build_ivfpq_index, save_faiss_index
 from src.stacksearch.data.preprocess import bm25_tokenize
 
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--questions",required=True,help="Path to questions_clean parquet")
