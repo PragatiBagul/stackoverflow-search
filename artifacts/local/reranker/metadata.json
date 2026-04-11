@@ -1,0 +1,24 @@
+{
+  "feature_cols": [
+    "bm25_score",
+    "dense_sim",
+    "token_overlap",
+    "query_len",
+    "doc_len"
+  ],
+  "params": {
+    "objective": "rank:ndcg",
+    "eval_metric": "ndcg",
+    "eta": 0.05,
+    "max_depth": 6,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "verbosity": 1
+  },
+  "num_boost_round": 31,
+  "val_metrics": {
+    "recall@k": 1.0,
+    "mrr@k": 1.0,
+    "ndcg@k": 1.0
+  }
+}

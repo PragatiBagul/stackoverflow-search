@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+pyarrow
+rank-bm25
+sentence-transformers
+faiss-cpu
+xgboost
+fastapi
+uvicorn
+python-dotenv
+google-cloud-storage
+tqdm
+beautifulsoup4
+lxml
